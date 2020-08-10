@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composition API</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <p>{{reverseMessage}}</p>
+        <p>{{counter}}</p>
+        <button @click="onClick">点我吧</button>
+    </div>
+    <script src="../vue.global.js"></script>
+    <script>
+
+        const {createApp, reactive, computed, onMounted, ref, toRefs} = Vue;
+        const app = createApp({
+            setup() {
+                // 声明响应式数据
+                const state = reactive({
+                    message: 'Composition API',
+                    reverseMessage: computed(() => { // 计算属性
+                        return state.message.split('').reverse().join('')
+                    })
+                })
+
+                // 单值响应式，将原始值包装成对象
+                const counter = ref(new Date().toLocaleString())
+
+                // 修改Ref对象，要设置其value属性
+                setInterval(() => {
+                    counter.value = new Date().toLocaleString()
+                }, 1000)
+
+                // 直接声明回调函数
+                function onClick() {
+                    // console.log('click me');
+                    state.message = state.reverseMessage
+                }
+
+                // 生命周期钩子
+                onMounted(() => {
+                    console.log('mounted');
+                })
+
+                // 返回一个渲染函数上下文对象
+                // return {state, onClick, counter}
+
+                // 用toRefs展开响应式数据
+                // toRefs(proxy)可以把proxy里面每个属性都转换为响应式的数据
+                return {...toRefs(state), onClick, counter}
+
+            }
+        })
+
+        app.mount('#app');
+    </script>
+</body>
+</html>

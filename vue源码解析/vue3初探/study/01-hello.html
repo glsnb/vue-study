@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Vue3</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <button @click="handle">点我吧</button>
+        <comp></comp>
+    </div>
+    <script src="../vue.global.js"></script>
+    <script>
+        const {createApp} = Vue
+        const app = createApp({
+            data() {
+                return {
+                    message: 'Finting'
+                }
+            },
+            methods: {
+                handle() {
+                    console.log('你点了我！！！');
+                }
+            }
+        })
+    
+        // 组件
+        app.component('comp', {
+            template: '<div>{{mess}}</div><button @click="hand">点我吧</button>',
+            data() {
+                return {
+                    mess: 'comp!!!'
+                }
+            },
+            methods: {
+                hand() {
+                    console.log('我是儿子！！！');
+                }
+            }
+        })
+        app.mount('#app')
+        console.log(app);
+    </script>
+</body>
+</html>
