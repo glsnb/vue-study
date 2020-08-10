@@ -793,7 +793,7 @@ export function createPatchFunction (backend) {
         const parentElm = nodeOps.parentNode(oldElm)
 
         // create new node
-        // 创建正课dom树
+        // 创建整颗dom树
         createElm(
           vnode,
           insertedVnodeQueue,
