@@ -40,10 +40,10 @@ function reactive(target){
 let effectStack = []
 let tagetMap = new WeakMap()
 
-// {
-//   target:{
-//     age: []  (set),
-//     name:[effect]
+// {                    tagetMap   new WeakMap()
+//   target:{           depsMap    new Map()
+//     age: []  (set),  dep        new Set()
+//     name:[effect]    effects    new Set()
 //   }
 // }
 function trigger(target, key, info){
